@@ -21,7 +21,7 @@ export const Form = ({ addToList }) => {
           placeholder="Задача"
           value={value}
           name='oneTodo'
-          onChange={(event) => setValue(event.target.value)} //fdsdf
+          onChange={(event) => setValue(event.target.value)} 
           type="text"
           className="form-control" />
       </div>

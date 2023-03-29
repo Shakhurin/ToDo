@@ -1,3 +1,4 @@
+import React from 'react'
 import { Form } from '../Form'
 import style from './header.module.css'
 
@@ -10,3 +11,5 @@ export const Header = ({addToList}) => {
     </>
   )
 }
+
+export const MemoHeader = React.memo(Header)

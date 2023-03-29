@@ -1,50 +1,23 @@
 import './App.css';
-import { Footer } from './components/Footer';
+import { MemoFooter } from './components/Footer';
 import { Main } from './components/Main';
-import { useEffect, useState } from 'react';
-import { Header } from './components/Header';
-import { v4 as uuidv4 } from 'uuid';
-import { LS_TOKEN } from './components/utils/constants';
+import { MemoHeader } from './components/Header';
+import { useTodos } from './hooks/useTodos';
 
 
 
 function App() {
 
-  const [todos, setTodos] = useState(() => {
-    const todoList = localStorage.getItem(LS_TOKEN)
-  
-    return todoList ? JSON.parse(todoList) : []
-  })
 
-  useEffect(() => {
-    localStorage.setItem(LS_TOKEN, JSON.stringify(todos))
-  }, [todos])
-
-  const addToList = (value) => {
-    const newTodo = {
-      id: uuidv4(),
-      title: value,
-      status: false
-    }
-
-    setTodos((prev => [newTodo, ...prev]))
-  }
-
-  const deleteList = () => {
-    setTodos([])
-  }
-
-  const deleteOneTodo = (id) => {
-    setTodos((prev) => prev.filter((todo) => todo.id !== id))
-  }
+  const { todos, addToList, deleteOneTodo, updTodoStatus, deleteList } = useTodos()
 
   return (
     <div className="App">
-      <Header addToList={addToList} />
+      <MemoHeader addToList={addToList} />
 
-      <Main todos={todos} deleteList={deleteList} deleteOneTodo={deleteOneTodo} />
+      <Main todos={todos} deleteList={deleteList} deleteOneTodo={deleteOneTodo} updTodoStatus={updTodoStatus} />
 
-      <Footer />
+      <MemoFooter />
     </div>
   );
 }
